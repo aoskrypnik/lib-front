@@ -46,7 +46,7 @@
 <script>
 import axios from "axios";
 
-const endpoint = process.env.ENDPOINT;
+const endpoint = process.env.VUE_APP_ENDPOINT;
 
 export default {
   name: "DeleteModal",

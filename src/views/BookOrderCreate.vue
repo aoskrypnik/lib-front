@@ -26,7 +26,7 @@ import BookInfoCard from "../components/BookInfoCard";
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import router from "@/router";
 
-const endpoint = process.env.ENDPOINT;
+const endpoint = process.env.VUE_APP_ENDPOINT;
 
 export default {
   name: "BookOrder",

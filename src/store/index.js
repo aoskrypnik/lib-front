@@ -5,7 +5,7 @@ import router from '../router'
 
 Vue.use(Vuex)
 
-const endpoint = process.env.ENDPOINT;
+const endpoint = process.env.VUE_APP_ENDPOINT;
 
 export default new Vuex.Store({
     state: {
