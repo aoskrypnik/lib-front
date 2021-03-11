@@ -50,6 +50,13 @@
                             <Book :book="book" @delete-book="deleteBook"/>
                         </v-col>
                     </v-row>
+                    <div class="text-center">
+                        <v-pagination
+                                v-model="page"
+                                :length="totalPages"
+                                @input="getContent"
+                        ></v-pagination>
+                    </div>
                 </v-col>
             </v-row>
         </v-container>
@@ -63,6 +70,7 @@
     import {mapGetters} from "vuex";
 
     const endpoint = process.env.VUE_APP_ENDPOINT;
+    const size = 2;
 
     export default {
         name: 'Home',
@@ -74,10 +82,13 @@
                 books: [],
                 isAvailableOnly: false,
                 selectedAuthor: '',
-                selectedGenre: ''
+                selectedGenre: '',
+                totalPages: 1,
+                page: 1
             }
         },
         created() {
+            this.page = +this.$route.query.page || 1
             this.selectedAuthor = this.$route.query.author || ''
             this.selectedGenre = this.$route.query.genre || ''
             this.isAvailableOnly = this.$route.query.isAvailableOnly === 'true'
@@ -92,6 +103,7 @@
                 this.$router.push({
                     query:
                         {
+                            page: this.page,
                             author: this.selectedAuthor,
                             genre: this.selectedGenre,
                             isAvailableOnly: this.isAvailableOnly,
@@ -99,13 +111,16 @@
                 });
                 axios.get(`${endpoint}/books`, {
                     params: {
+                        page: this.page - 1,
                         author: this.selectedAuthor,
                         genre: this.selectedGenre,
                         isAvailableOnly: this.isAvailableOnly,
+                        size: size
                     }
                 })
                     .then(response => {
-                        this.books = response.data
+                        this.books = response.data.content
+                        this.totalPages = response.data.totalPages
                         console.log(response.data)
                     })
             },
@@ -113,6 +128,7 @@
                 this.selectedAuthor = ''
                 this.selectedGenre = ''
                 this.isAvailableOnly = false
+                this.page = 1
                 this.getContent()
             }
         },
