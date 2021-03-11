@@ -27,13 +27,13 @@
           </v-btn>
         </v-badge>
 
-        <v-btn
-            class="mr-4"
-            text
-            @click="$router.push('/sprint-plan')"
-        >
-          Sprint plan
-        </v-btn>
+<!--        <v-btn-->
+<!--            class="mr-4"-->
+<!--            text-->
+<!--            @click="$router.push('/sprint-plan')"-->
+<!--        >-->
+<!--          Sprint plan-->
+<!--        </v-btn>-->
         <v-btn
             v-if="roleGetter === 'ADMINISTRATOR'"
             text
