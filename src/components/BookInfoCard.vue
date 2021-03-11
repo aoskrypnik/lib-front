@@ -29,7 +29,7 @@
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn text class="ml-auto red--text">
+          <v-btn text class="ml-auto red--text"  @click="removeBook()">
             <v-icon left>mdi-delete</v-icon>
             Видалити
           </v-btn>
@@ -40,12 +40,23 @@
 </template>
 
 <script>
+import { mapMutations} from "vuex";
+
 export default {
   name: "BookInfoCard",
 
   props: [
     'book'
   ],
+  methods: {
+
+    ...mapMutations([
+      'storageRemoveMutation',
+    ]),
+    removeBook() {
+      this.storageRemoveMutation({book: this.book})
+    },
+  }
 }
 </script>
 

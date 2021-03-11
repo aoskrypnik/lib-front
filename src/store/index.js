@@ -55,6 +55,15 @@ export default new Vuex.Store({
             localStorage.setItem("storage", JSON.stringify(state.storage))
             localStorage.setItem("storageNum",  JSON.stringify(state.storageNum))
         },
+        storageRemoveMutation(state, {book}) {
+            let index = state.storage.findIndex(b => b === book)
+            console.log("index -" +index)
+            console.log("index -" )
+            state.storage.splice(index, 1)
+            state.storageNum--
+            localStorage.setItem("storage", JSON.stringify(state.storage))
+            localStorage.setItem("storageNum",  JSON.stringify(state.storageNum))
+        },
         storageRestoreMutation(state) {
             if (localStorage.getItem("storage")) {
                 state.storage = JSON.parse(localStorage.getItem("storage"))
