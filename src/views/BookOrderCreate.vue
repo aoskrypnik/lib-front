@@ -1,23 +1,41 @@
 <template>
-  <div>
-    <div class="font-weight-medium text-h4">
-      Ваше замовлення:
-    </div>
-    <v-container>
-      <v-col class="col-md-10">
-        <v-row>
-          <v-col class="col-sm-12 col-md-9" v-for="book in storageGetter" :key="book.isbn">
-            <BookInfoCard :book="book"/>
-          </v-col>
-        </v-row>
+  <v-container>
+    <v-row>
+      <v-col class="col-lg-6 mx-auto">
+        <v-card>
+          <v-toolbar dark flat color="primary">
+            <v-toolbar-title>Your order</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text v-if="storageNumGetter!==0">
+            <v-container>
+              <v-row>
+                <v-col class="col-12" v-for="book in storageGetter" :key="book.isbn">
+                  <BookInfoCard :book="book"/>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-container>
+              <span class="d-block"><b>Order date:</b> {{ takenDateFirst }} – {{ takenDateSecond }}</span>
+              <span class="d-block"><b>Expected return date:</b> {{ estimatedReturnDate }}</span>
+            </v-container>
+            <div class="d-flex">
+              <v-btn color="primary" depressed class="ml-auto" @click="doOrder()">
+                Order
+              </v-btn>
+            </div>
+          </v-card-text>
+          <v-card-text v-else>
+            <span>Your basket is empty :(</span>
+            <div class="d-flex">
+              <v-btn color="primary" depressed class="ml-auto" @click="$router.push('/')">
+                Back to catalog
+              </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
-    </v-container>
-    <p>Дата взяття від {{ takenDateFirst }} до {{ takenDateSecond }}</p>
-    <p>Очікувана дата повернення {{ estimatedReturnDate }}</p>
-    <v-btn color="primary" @click="doOrder()">
-      Замовити
-    </v-btn>
-  </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -61,7 +79,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'storageGetter'
+      'storageGetter', 'storageNumGetter'
     ]),
   },
 }

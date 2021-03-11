@@ -1,9 +1,15 @@
 <template>
   <v-app>
-
     <v-app-bar app>
-      <v-container class="d-flex justify-space-between align-center">
-        <v-toolbar-title style="cursor: pointer" @click="$router.push('/')">Library</v-toolbar-title>
+      <v-container class="d-flex">
+        <v-toolbar-title
+            style="cursor: pointer"
+            @click="$router.push('/')"
+
+        >
+          <v-icon color="primary">mdi-bookshelf</v-icon>
+          Library
+        </v-toolbar-title>
         <v-spacer/>
 
         <v-btn
@@ -12,6 +18,9 @@
             text
             @click="$router.push('/orders-list')"
         >
+          <v-icon left>
+            mdi-history
+          </v-icon>
           My orders
         </v-btn>
         <v-btn
@@ -24,24 +33,27 @@
         </v-btn>
 
         <v-badge
-            v-if="roleGetter === 'READER'"
-            color="green"
+            v-if="roleGetter === 'READER' && storageNumGetter!==0"
+            color="primary"
+            overlap
+            class="mr-4"
             :content="storageNumGetter"
         >
-          <v-btn @click="$router.push('/book-order')">
-            <v-icon>
-              mdi-basket
+          <v-btn text @click="$router.push('/book-order')">
+            <v-icon left>
+              mdi-basket-outline
             </v-icon>
+            Current order
           </v-btn>
         </v-badge>
 
-<!--        <v-btn-->
-<!--            class="mr-4"-->
-<!--            text-->
-<!--            @click="$router.push('/sprint-plan')"-->
-<!--        >-->
-<!--          Sprint plan-->
-<!--        </v-btn>-->
+        <!--        <v-btn-->
+        <!--            class="mr-4"-->
+        <!--            text-->
+        <!--            @click="$router.push('/sprint-plan')"-->
+        <!--        >-->
+        <!--          Sprint plan-->
+        <!--        </v-btn>-->
         <v-btn
             v-if="roleGetter === 'ADMINISTRATOR'"
             text

@@ -1,9 +1,10 @@
 <template>
   <v-card class="book-card">
-    <div class="d-flex flex-no-wrap justify-space-between">
+    <div class="d-flex">
       <v-img
           :src="`${book.imageLink}`"
-          class="book-cover"
+          max-width="150px"
+          height="220px"
       ></v-img>
       <div>
         <v-card-title> {{ book.title }}</v-card-title>
@@ -22,21 +23,24 @@
                 v-for="genre in book.genres" :key="genre.id"
             > {{ genre.genreName }}
             </v-chip>
-            <v-chip small outlined label class="chip"> {{ book.pagesNum }} сторінок</v-chip>
-            <v-chip small outlined label class="chip"> {{ book.publishYear }} рік</v-chip>
+            <v-chip small outlined label class="chip"> {{ book.pagesNum }} pages</v-chip>
+            <v-chip small outlined label class="chip"> {{ book.publishYear }} </v-chip>
             <v-chip small outlined label class="chip"> {{ book.publishCountry }}</v-chip>
-            <v-chip small outlined label color="danger" class="chip"
+            <v-chip small outlined label
+                    color="danger" class="chip"
                     v-if="book.copiesNum === 0"
-            > Немає в наявності
+            >
+              Not available
             </v-chip>
-            <v-chip small outlined label color="success" class="chip"
+            <v-chip small outlined label
+                    color="success" class="chip"
                     v-else
             >
-              Є в наявності
+              Available
             </v-chip>
           </div>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="card-actions">
           <v-btn text class="ml-auto"
                  v-if="book.copiesNum === 0"
           >
@@ -44,7 +48,10 @@
             Повідомити
           </v-btn>
           <div v-else>
-            <orderModal :book=book v-if="roleGetter==='READER'"></orderModal>
+            <orderModal
+                :book=book
+                v-if="roleGetter==='READER'"
+            ></orderModal>
             <div v-else-if="roleGetter==='ADMINISTRATOR'">
               <v-btn
                   class="ml-2"
@@ -97,13 +104,13 @@ export default {
   overflow: hidden;
 }
 
-.book-cover {
-  width: 150px;
-}
-
 .chip {
   margin-right: 8px;
   margin-bottom: 8px;
+}
+
+.card-actions {
+  padding: 0 16px 16px;
 }
 
 </style>

@@ -4,23 +4,34 @@
         v-model="dialog"
         width="500"
     >
-
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-if="notContains()" text color="primary" class="ml-auto" v-bind="attrs" v-on="on" @click="addToStorage()">
-          Замовити
+        <v-btn
+            v-if="notContains()"
+            text color="primary"
+            v-bind="attrs"
+            v-on="on" @click="addToStorage()"
+            block
+        >
+          <v-icon left>mdi-basket-outline</v-icon>
+          Order
         </v-btn>
-        <p v-else>
-          Вже є в замовленні
-        </p>
+        <v-btn
+            v-else
+            text
+            @click="removeBook()"
+        >
+          <v-icon left>mdi-delete-outline</v-icon>
+          Remove from order
+        </v-btn>
       </template>
 
       <v-card>
         <v-card-title class="headline grey lighten-3">
-          Замовлення
+          Order
         </v-card-title>
 
         <v-card-text class="my-3">
-          Створити замовлення чи додати ще книжок?
+          Do you want to add more books or create order?
         </v-card-text>
 
         <v-divider></v-divider>
@@ -32,14 +43,14 @@
               text
               @click="dialog = false"
           >
-            Додати ще
+            Add more books
           </v-btn>
           <v-btn
               color="primary"
-              text
+              depressed
               @click="$router.push('/book-order')"
           >
-            Створити замовлення
+            Create order
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -67,7 +78,13 @@ export default {
     },
     notContains() {
       return !this.storageGetter.map(sb => sb.isbn).includes(this.book.isbn)
-    }
+    },
+    ...mapMutations([
+      'storageRemoveMutation',
+    ]),
+    removeBook() {
+      this.storageRemoveMutation({book: this.book})
+    },
   },
   computed: {
     ...mapGetters([
@@ -76,3 +93,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

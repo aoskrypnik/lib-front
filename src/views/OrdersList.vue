@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <v-card v-for="order in orders" :key="order.id" class="my-2">
-      <v-card-title>Order id {{ order.id }}</v-card-title>
-      <v-card-subtitle>Order status {{ order.status }}</v-card-subtitle>
-      <v-list>
-        <v-list-item v-for="copy in order.copies" :key="copy.id">
-          Book copy id {{ copy.id }}
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </div>
+  <v-container>
+    <v-row v-for="order in orders" :key="order.id">
+      <v-col>
+        <v-card>
+          <v-card-title>Order {{ order.id }}</v-card-title>
+          <v-card-subtitle>Order status {{ order.status }}</v-card-subtitle>
+          <v-card-text>
+            <span>Estimated return date - {{order.estimatedReturnDate.split('T')[0]}} </span>
+            <span class="d-block" v-for="copy in order.copies" :key="copy.id">
+        Book copy id {{ copy.id }}
+      </span>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
