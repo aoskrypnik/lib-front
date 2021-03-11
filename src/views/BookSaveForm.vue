@@ -1,137 +1,158 @@
 <template>
-  <v-form ref="form">
-    <v-text-field
-        v-model="isbn"
-        label="ISBN"
-        :rules="[v => !!v || 'isbn is required']"
-        required></v-text-field>
+  <v-container>
+    <v-row>
+      <v-col class="col-md-6 mx-auto">
+        <v-card>
+          <v-toolbar dark flat color="primary">
+            <v-toolbar-title>Add book</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form ref="form">
+              <v-text-field
+                  v-model="isbn"
+                  label="ISBN"
+                  :rules="[v => !!v || 'isbn is required']"
+                  required></v-text-field>
 
-    <v-text-field
-        v-model="title"
-        label="Title"
-        required></v-text-field>
+              <v-text-field
+                  v-model="title"
+                  label="Title"
+                  required></v-text-field>
 
-    <v-autocomplete
-        v-model="selectedAuthors"
-        :items="authorNames"
-        label="Authors"
-        outlined
-        dense
-        chips
-        small-chips
-        multiple
-        required></v-autocomplete>
+              <v-autocomplete
+                  v-model="selectedAuthors"
+                  :items="authorNames"
+                  label="Authors"
+                  outlined
+                  dense
+                  chips
+                  small-chips
+                  multiple
+                  required></v-autocomplete>
 
-    <v-autocomplete
-        v-model="selectedGenres"
-        :items="genreNames"
-        label="Genres"
-        outlined
-        dense
-        chips
-        small-chips
-        multiple
-        required></v-autocomplete>
+              <v-autocomplete
+                  v-model="selectedGenres"
+                  :items="genreNames"
+                  label="Genres"
+                  outlined
+                  dense
+                  chips
+                  small-chips
+                  multiple
+                  required></v-autocomplete>
 
-    <v-slider
-        v-model="copiesNum"
-        class="align-center"
-        label="Number of copies"
-        :min="1"
-        :max="50"
-        hide-details
-    >
-      <template v-slot:append>
-        <v-text-field
-            v-model="copiesNum"
-            class="mt-0 pt-0"
-            hide-details
-            single-line
-            type="number"
-            style="width: 60px"
-        ></v-text-field>
-      </template>
-    </v-slider>
+              <div class="mb-6">
+                <v-slider
+                    v-model="copiesNum"
+                    class="align-center"
+                    label="Number of copies"
+                    :min="1"
+                    :max="50"
+                    hide-details
+                >
+                  <template v-slot:append>
+                    <v-text-field
+                        v-model="copiesNum"
+                        class="mt-0 pt-0"
+                        hide-details
+                        single-line
+                        type="number"
+                        style="width: 60px"
+                    ></v-text-field>
+                  </template>
+                </v-slider>
 
-    <v-slider
-        v-model="publishYear"
-        class="align-center"
-        label="Publish year"
-        :min="-2000"
-        :max="2021"
-        hide-details
-    >
-      <template v-slot:append>
-        <v-text-field
-            v-model="publishYear"
-            class="mt-0 pt-0"
-            hide-details
-            single-line
-            type="number"
-            style="width: 60px"
-        ></v-text-field>
-      </template>
-    </v-slider>
+                <v-slider
+                    v-model="publishYear"
+                    class="align-center"
+                    label="Publish year"
+                    :min="-2000"
+                    :max="2021"
+                    hide-details
+                >
+                  <template v-slot:append>
+                    <v-text-field
+                        v-model="publishYear"
+                        class="mt-0 pt-0"
+                        hide-details
+                        single-line
+                        type="number"
+                        style="width: 60px"
+                    ></v-text-field>
+                  </template>
+                </v-slider>
 
-    <v-slider
-        v-model="pagesNum"
-        class="align-center"
-        label="Number of pages"
-        :min="1"
-        :max="3000"
-        hide-details
-    >
-      <template v-slot:append>
-        <v-text-field
-            v-model="pagesNum"
-            class="mt-0 pt-0"
-            hide-details
-            single-line
-            type="number"
-            style="width: 60px"
-        ></v-text-field>
-      </template>
-    </v-slider>
+                <v-slider
+                    v-model="pagesNum"
+                    class="align-center"
+                    label="Number of pages"
+                    :min="1"
+                    :max="3000"
+                    hide-details
+                >
+                  <template v-slot:append>
+                    <v-text-field
+                        v-model="pagesNum"
+                        class="mt-0 pt-0"
+                        hide-details
+                        single-line
+                        type="number"
+                        style="width: 60px"
+                    ></v-text-field>
+                  </template>
+                </v-slider>
+              </div>
 
-    <v-autocomplete
-        v-model="publishCountry"
-        :items="countries"
-        label="Country of publishing"
-        outlined
-        dense
-        chips
-        small-chips
-        required></v-autocomplete>
 
-    <v-autocomplete
-        v-model="language"
-        :items="languages"
-        label="Language"
-        outlined
-        dense
-        chips
-        small-chips
-        required></v-autocomplete>
+              <v-autocomplete
+                  v-model="publishCountry"
+                  :items="countries"
+                  label="Country of publishing"
+                  outlined
+                  dense
+                  required></v-autocomplete>
 
-    <v-file-input
-        v-model="image"
-        accept=".jpg, .png"
-        label="Upload image"
-        filled
-        prepend-icon="mdi-camera"
-    ></v-file-input>
+              <v-autocomplete
+                  v-model="language"
+                  :items="languages"
+                  label="Language"
+                  outlined
+                  dense
+                  required></v-autocomplete>
 
-    <v-btn
-        class="mr-4"
-        @click="submit"
-        color="primary">
-      save
-    </v-btn>
+              <v-file-input
+                  v-model="image"
+                  accept=".jpg, .png"
+                  label="Upload image"
+                  filled
+                  prepend-icon="mdi-camera"
+              ></v-file-input>
 
-    <v-btn @click="clear">
-      clear
-    </v-btn>
-  </v-form>
+              <div class="d-flex">
+
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    text
+                    class="mr-4"
+                    @click="clear">
+                  clear
+                </v-btn>
+
+                <v-btn
+                    @click="submit"
+                    depressed
+                    color="primary">
+                  save
+                </v-btn>
+              </div>
+
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

@@ -29,6 +29,7 @@
             text
             @click="$router.push('/orders/search')"
         >
+          <v-icon left>mdi-basket-outline</v-icon>
           Orders
         </v-btn>
 
@@ -57,11 +58,10 @@
         <v-btn
             v-if="roleGetter === 'ADMINISTRATOR'"
             text
-            color="primary"
             class="mr-4"
             @click="$router.push('/save-book')"
         >
-          <v-icon left>mdi-book-outline</v-icon>
+          <v-icon left>mdi-book-plus-multiple-outline</v-icon>
           Add book
         </v-btn>
 
