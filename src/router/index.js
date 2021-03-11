@@ -8,6 +8,7 @@ import BookSaveForm from "@/views/BookSaveForm";
 import BookEditForm from "@/views/BookEditForm";
 import BookOrder from "@/views/BookOrderCreate";
 import OrdersList from "@/views/OrdersList";
+import AdminOrdersView from "@/views/AdminOrdersView";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,10 @@ const routes = [
         path: '/orders-list',
         name: 'OrdersList',
         component: OrdersList
+    },    {
+        path: ' /orders/search',
+        name: 'AdminOrdersView',
+        component: AdminOrdersView,
     },
 ]
 

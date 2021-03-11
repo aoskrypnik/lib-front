@@ -14,6 +14,14 @@
         >
           My orders
         </v-btn>
+        <v-btn
+            v-if="roleGetter === 'ADMINISTRATOR'"
+            class="mr-4"
+            text
+            @click="$router.push('/orders/search')"
+        >
+          Orders
+        </v-btn>
 
         <v-badge
             v-if="roleGetter === 'READER'"
