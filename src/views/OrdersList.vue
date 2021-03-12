@@ -7,8 +7,8 @@
           <v-card-subtitle>Order status {{ order.status }}</v-card-subtitle>
           <v-card-text>
             <span>Estimated return date - {{order.estimatedReturnDate.split('T')[0]}} </span>
-            <span class="d-block" v-for="copy in order.copies" :key="copy.id">
-        Book copy id {{ copy.id }}
+            <span class="d-block" v-for="book in order.books" :key="book.id">
+        Book {{ book.title }}
       </span>
           </v-card-text>
         </v-card>
