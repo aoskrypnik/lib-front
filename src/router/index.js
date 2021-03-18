@@ -52,8 +52,9 @@ const routes = [
         path: '/orders-list',
         name: 'OrdersList',
         component: OrdersList
-    },    {
-        path: ' /orders/search',
+    },
+    {
+        path: '/admin-list',
         name: 'AdminOrdersView',
         component: AdminOrdersView,
     },

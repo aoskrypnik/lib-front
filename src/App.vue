@@ -27,7 +27,7 @@
             v-if="roleGetter === 'ADMINISTRATOR'"
             class="mr-4"
             text
-            @click="$router.push('/orders/search')"
+            @click="$router.push('/admin-list')"
         >
           <v-icon left>mdi-basket-outline</v-icon>
           Orders
