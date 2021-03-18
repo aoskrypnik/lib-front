@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div>
+    <div ref="ordersContainer">
       <v-card v-for="order in orders" :key="order.id" class="my-2">
         <v-card-title>Order id {{ order.id }}</v-card-title>
         <v-card-subtitle>Order status {{ order.status }}</v-card-subtitle>
@@ -14,19 +14,27 @@
             color="success"
             class="my-2 mx-2"
             depressed
-            text>Видати замовлення
+            @click="changeStatus(order, 'TAKEN')"
+            text>Видати
         </v-btn>
-        <!--          @click="$router.push('/orders-list')"-->
+        <v-btn
+            v-if="order.status === 'PENDING'"
+            color="error"
+            class="my-2 mx-2"
+            depressed
+            text
+            @click="changeStatus(order, 'CANCELED')"
+        >Відмінити
+        </v-btn>
 
         <v-btn
             v-if="order.status === 'TAKEN'"
             color="success"
             class="my-2 mx-2"
             depressed
-            text>Отримати книги
+            @click="changeStatus(order, 'RETURNED')"
+            text>Отримати
         </v-btn>
-        <!--          @click="$router.push('/orders-list')"-->
-
       </v-card>
     </div>
   </v-container>
@@ -46,8 +54,6 @@ export default {
     }
   },
   created() {
-    console.log("orderslog!!!!!!!!!")
-
     axios.get(`${endpoint}/orders/search`,
         {
           params: {
@@ -56,12 +62,23 @@ export default {
         }
     ).then(response => {
       this.orders = response.data
-      console.log("orders")
-      console.log(this.orders)
     })
-
-    // let res = [{ }];
-    // this.orders = res;
+  },
+  methods: {
+    changeStatus(order, status) {
+      // get order by id
+      order.status = status
+      console.log("Order")
+      console.log(order)
+      axios.put(`${endpoint}/orders/${order.id}`,
+          order
+      ).then(response => {
+        this.orders.forEach(function (order) {
+          if (order.id === response.id)
+            order = response
+        });
+      })
+    }
   }
 }
 </script>
