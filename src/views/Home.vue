@@ -1,63 +1,59 @@
 <template>
-  <div>
-    <v-container>
-      <v-row>
-        <v-col class="col-12 col-md-6 col-lg-3">
-          <v-card>
-            <v-card-title>
-              Filters
-            </v-card-title>
-            <v-card-text>
-              <v-form>
-                <v-checkbox
-                    v-model="isAvailableOnly"
-                    label="Available only"
-                    @change="getContent"
-                >
-                </v-checkbox>
-                <v-autocomplete
-                    v-model="selectedAuthor"
-                    :items="authorNames"
-                    label="Author"
-                    dense
-                    outlined
-                    @change="getContent"
-                ></v-autocomplete>
+  <v-container>
+    <v-row>
+      <v-col class="col-12 col-md-6 col-lg-3">
+        <v-card>
+          <v-card-title>
+            Filters
+          </v-card-title>
+          <v-card-text>
+            <v-checkbox
+                v-model="isAvailableOnly"
+                label="Available only"
+                @change="getContent"
+            >
+            </v-checkbox>
+            <v-autocomplete
+                v-model="selectedAuthor"
+                :items="authorNames"
+                label="Author"
+                dense
+                outlined
+                @change="getContent"
+            ></v-autocomplete>
 
-                <v-autocomplete
-                    v-model="selectedGenre"
-                    :items="genreNames"
-                    label="Genre"
-                    dense
-                    outlined
-                    @change="getContent"
-                ></v-autocomplete>
+            <v-autocomplete
+                v-model="selectedGenre"
+                :items="genreNames"
+                label="Genre"
+                dense
+                outlined
+                @change="getContent"
+            ></v-autocomplete>
 
-                <v-btn text block color="primary" @click="clearFilters">
-                  Clear filters
-                </v-btn>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
+            <v-btn text block color="primary" @click="clearFilters">
+              Clear filters
+            </v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-        <v-col class="col-12 col-md-6 col-lg-9">
-          <v-row>
-            <v-col class="col-12 col-md-12 col-lg-6" v-for="book in books" :key="book.isbn">
-              <Book :book="book" @delete-book="deleteBook"/>
-            </v-col>
-          </v-row>
-          <div class="text-center mt-8">
-            <v-pagination
-                v-model="page"
-                :length="totalPages"
-                @input="getContent"
-            ></v-pagination>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+      <v-col class="col-12 col-md-6 col-lg-9">
+        <v-row>
+          <v-col class="col-12 col-lg-6" v-for="book in books" :key="book.isbn">
+            <Book :book="book" @delete-book="deleteBook"/>
+          </v-col>
+        </v-row>
+        <div class="text-center mt-8">
+          <v-pagination
+              v-model="page"
+              :length="totalPages"
+              @input="getContent"
+          ></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
