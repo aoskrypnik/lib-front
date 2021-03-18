@@ -7,18 +7,19 @@
     <template v-slot:activator="{ on, attrs }">
       <v-btn text color="error" class="ml-2" v-bind="attrs"
              v-on="on">
-        <v-icon left>mdi-trash-can-outline</v-icon>
-        Delete
+        <v-icon left class="d-none d-sm-inline-flex">mdi-trash-can-outline</v-icon>
+        <v-icon class="d-inline-flex d-sm-none">mdi-trash-can-outline</v-icon>
+        <span class="d-none d-sm-inline-flex">Delete</span>
       </v-btn>
     </template>
 
     <v-card>
       <v-card-title class="headline grey lighten-3">
-        Видалення
+        Delete book
       </v-card-title>
 
       <v-card-text class="my-3">
-        Ви дійсно хочете видалити книгу "{{ book.title }}"?
+        Do you really want to delete "{{ book.title }}"?
       </v-card-text>
 
       <v-divider></v-divider>
@@ -29,14 +30,14 @@
             text
             @click="dialog = false"
         >
-          Ні, скасувати
+          No, cancel
         </v-btn>
         <v-btn
             color="error"
             text
             @click="deleteBook(book.isbn)"
         >
-          Так, видалити
+          Yes, delete
         </v-btn>
       </v-card-actions>
     </v-card>

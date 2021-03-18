@@ -5,6 +5,7 @@
           :src="`${book.imageLink}`"
           max-width="150px"
           height="220px"
+          class="align-self-center"
       ></v-img>
       <div>
         <v-card-title> {{ book.title }}</v-card-title>
@@ -44,8 +45,9 @@
           <v-btn text class="ml-auto"
                  v-if="book.copiesNum === 0"
           >
-            <v-icon left>mdi-bell-outline</v-icon>
-            Повідомити
+            <v-icon left class="d-none d-sm-inline-flex">mdi-bell-outline</v-icon>
+            <v-icon class="d-inline-flex d-sm-none">mdi-bell-outline</v-icon>
+            <span class="d-none d-sm-inline-flex">Notify</span>
           </v-btn>
           <div v-else>
             <orderModal
@@ -58,8 +60,9 @@
                   text
                   @click="$router.push({ name: 'BookEditForm', params: {id: book.isbn }})"
               >
-                <v-icon left>mdi-pencil</v-icon>
-                Edit
+                <v-icon left class="d-none d-sm-inline-flex">mdi-pencil</v-icon>
+                <v-icon class="d-inline-flex d-sm-none">mdi-pencil</v-icon>
+                <span class="d-none d-sm-inline-flex">Edit</span>
               </v-btn>
               <deleteModal :book="book" @delete-book="deleteBook"></deleteModal>
             </div>

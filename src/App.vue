@@ -5,10 +5,10 @@
         <v-toolbar-title
             style="cursor: pointer"
             @click="$router.push('/')"
-
         >
-          <v-icon color="primary">mdi-bookshelf</v-icon>
-          Library
+          <v-icon left color="primary" class="d-none d-sm-inline-flex">mdi-bookshelf</v-icon>
+          <v-icon color="primary" class="d-inline-flex d-sm-none">mdi-bookshelf</v-icon>
+          <span class="d-none d-sm-inline-flex">Library</span>
         </v-toolbar-title>
         <v-spacer/>
 
@@ -18,10 +18,9 @@
             text
             @click="$router.push('/orders-list')"
         >
-          <v-icon left>
-            mdi-history
-          </v-icon>
-          My orders
+          <v-icon left class="d-none d-sm-inline-flex">mdi-history</v-icon>
+          <v-icon class="d-inline-flex d-sm-none">mdi-history</v-icon>
+          <span class="d-none d-sm-inline-flex">My orders</span>
         </v-btn>
         <v-btn
             v-if="roleGetter === 'ADMINISTRATOR'"
@@ -29,8 +28,9 @@
             text
             @click="$router.push('/admin-list')"
         >
-          <v-icon left>mdi-basket-outline</v-icon>
-          Orders
+          <v-icon left class="d-none d-sm-inline-flex">mdi-basket-outline</v-icon>
+          <v-icon class="d-inline-flex d-sm-none">mdi-basket-outline</v-icon>
+          <span class="d-none d-sm-inline-flex">Orders</span>
         </v-btn>
 
         <v-badge
@@ -41,10 +41,9 @@
             :content="storageNumGetter"
         >
           <v-btn text @click="$router.push('/book-order')">
-            <v-icon left>
-              mdi-basket-outline
-            </v-icon>
-            Current order
+            <v-icon left class="d-none d-sm-inline-flex">mdi-basket-outline</v-icon>
+            <v-icon class="d-inline-flex d-sm-none">mdi-basket-outline</v-icon>
+            <span class="d-none d-sm-inline-flex">Current order</span>
           </v-btn>
         </v-badge>
 
@@ -61,8 +60,9 @@
             class="mr-4"
             @click="$router.push('/save-book')"
         >
-          <v-icon left>mdi-book-plus-multiple-outline</v-icon>
-          Add book
+          <v-icon left class="d-none d-sm-inline-flex">mdi-book-plus-multiple-outline</v-icon>
+          <v-icon class="d-inline-flex d-sm-none">mdi-book-plus-multiple-outline</v-icon>
+          <span class="d-none d-sm-inline-flex">Add book</span>
         </v-btn>
 
         <div>
@@ -73,14 +73,14 @@
               color="primary"
               @click="$router.push('/login')"
           >
-            <v-icon left>mdi-account</v-icon>
-            Login
+            <v-icon left class="d-none d-sm-inline-flex">mdi-account</v-icon>
+            <v-icon class="d-inline-flex d-sm-none">mdi-account</v-icon>
+            <span class="d-none d-sm-inline-flex">Login</span>
           </v-btn>
           <v-btn
               v-if="usernameGetter === null"
               color="primary"
               depressed
-              class="mr-4"
               @click="$router.push(`/registration`)"
           >
             Register
@@ -92,8 +92,9 @@
               color="error"
               @click="logoutAction"
           >
-            <v-icon left>mdi-logout</v-icon>
-            Logout
+            <v-icon left class="d-none d-sm-inline-flex">mdi-logout</v-icon>
+            <v-icon class="d-inline-flex d-sm-none">mdi-logout</v-icon>
+            <span class="d-none d-sm-inline-flex">Logout</span>
           </v-btn>
         </div>
 

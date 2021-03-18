@@ -19,6 +19,7 @@
                     v-model="selectedAuthor"
                     :items="authorNames"
                     label="Author"
+                    dense
                     outlined
                     @change="getContent"
                 ></v-autocomplete>
@@ -27,6 +28,7 @@
                     v-model="selectedGenre"
                     :items="genreNames"
                     label="Genre"
+                    dense
                     outlined
                     @change="getContent"
                 ></v-autocomplete>

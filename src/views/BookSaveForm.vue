@@ -24,7 +24,6 @@
                   :items="authorNames"
                   label="Authors"
                   outlined
-                  dense
                   chips
                   small-chips
                   multiple
@@ -35,7 +34,6 @@
                   :items="genreNames"
                   label="Genres"
                   outlined
-                  dense
                   chips
                   small-chips
                   multiple
@@ -109,7 +107,6 @@
                   :items="countries"
                   label="Country of publishing"
                   outlined
-                  dense
                   required></v-autocomplete>
 
               <v-autocomplete
@@ -117,7 +114,6 @@
                   :items="languages"
                   label="Language"
                   outlined
-                  dense
                   required></v-autocomplete>
 
               <v-file-input
@@ -129,9 +125,7 @@
               ></v-file-input>
 
               <div class="d-flex">
-
                 <v-spacer></v-spacer>
-
                 <v-btn
                     text
                     class="mr-4"
@@ -159,7 +153,6 @@
 import axios from "axios";
 import countries from "countries-list"
 import {mapGetters} from "vuex";
-
 
 const endpoint = process.env.VUE_APP_ENDPOINT;
 

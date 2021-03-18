@@ -13,6 +13,43 @@
                 lazy-validation
             >
 
+              <v-row>
+                <v-col>
+                  <v-text-field
+                      v-model="name"
+                      :counter="10"
+                      :rules="rules"
+                      label="Name"
+                      required
+                  ></v-text-field>
+                </v-col>
+
+                <v-col>
+                  <v-text-field
+                      v-model="surname"
+                      :counter="15"
+                      :rules="rules"
+                      label="Surname"
+                      required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  required
+              ></v-text-field>
+              <v-text-field
+                  v-model="phoneNumber"
+                  :rules="phoneRules"
+                  :counter="10"
+                  :error-messages="errors"
+                  label="Phone Number"
+                  required
+              ></v-text-field>
+
               <v-text-field
                   v-model="new_username"
                   :rules="rules"
@@ -33,37 +70,6 @@
                   :rules="[rules, passwordConfirmationRule]"
                   :type="'password'"
                   label="Confirm password"
-                  required
-              ></v-text-field>
-
-              <v-text-field
-                  v-model="name"
-                  :counter="10"
-                  :rules="rules"
-                  label="Name"
-                  required
-              ></v-text-field>
-
-              <v-text-field
-                  v-model="surname"
-                  :counter="15"
-                  :rules="rules"
-                  label="Surname"
-                  required
-              ></v-text-field>
-
-              <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  required
-              ></v-text-field>
-              <v-text-field
-                  v-model="phoneNumber"
-                  :rules="phoneRules"
-                  :counter="10"
-                  :error-messages="errors"
-                  label="Phone Number"
                   required
               ></v-text-field>
 

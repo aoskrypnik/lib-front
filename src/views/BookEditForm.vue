@@ -25,7 +25,6 @@
                   :items="authorNames"
                   label="Authors"
                   outlined
-                  dense
                   chips
                   small-chips
                   multiple
@@ -36,7 +35,6 @@
                   :items="genreNames"
                   label="Genres"
                   outlined
-                  dense
                   chips
                   small-chips
                   multiple
@@ -109,7 +107,6 @@
                   :items="countries"
                   label="Country of publishing"
                   outlined
-                  dense
                   required></v-autocomplete>
 
               <v-autocomplete
@@ -117,7 +114,6 @@
                   :items="languages"
                   label="Language"
                   outlined
-                  dense
                   required></v-autocomplete>
 
               <v-file-input
@@ -128,9 +124,9 @@
                   filled
                   prepend-icon="mdi-camera"
               ></v-file-input>
-              <v-img v-if="imageLink" :src="imageLink" contain/>
+              <v-img style="height: 200px" v-if="imageLink" :src="imageLink" contain/>
 
-              <div class="d-flex">
+              <div class="d-flex mt-4">
                 <v-btn
                     class="ml-auto"
                     @click="submit"
@@ -189,7 +185,7 @@ export default {
             this.pagesNum = response.data.pagesNum
             this.publishCountry = response.data.publishCountry
             this.language = response.data.language
-            this.imageLink = `/upload/${response.data.imageLink}`
+            this.imageLink = response.data.imageLink
           })
     } else {
       this.$router.push('/')
