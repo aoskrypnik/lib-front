@@ -10,6 +10,7 @@
             <v-autocomplete
                 v-model="selectedUserId"
                 label="User ID"
+                :items="orderIds"
                 dense
                 outlined
                 @change="getContent"
@@ -18,6 +19,7 @@
             <v-autocomplete
                 v-model="selectedStatus"
                 label="Status"
+                :items="orderStatuses"
                 dense
                 outlined
                 @change="getContent"
@@ -98,26 +100,20 @@ export default {
   name: "AdminOrdersView",
   data() {
     return {
-      orders: []
+      orders: [],
+      selectedStatus: '',
+      selectedUserId: ''
     }
   },
   created() {
-    axios.get(`${endpoint}/orders/search`,
-        {
-          params: {
-            userId: "",
-          }
-        }
-    ).then(response => {
-      this.orders = response.data
-    })
+    this.selectedStatus = this.$route.query.status || ''
+    this.selectedUserId = this.$route.query.userId || ''
+    this.getContent()
   },
   methods: {
     changeStatus(order, status) {
       // get order by id
       order.status = status
-      console.log("Order")
-      console.log(order)
       axios.put(`${endpoint}/orders/${order.id}`,
           order
       ).then(response => {
@@ -126,6 +122,40 @@ export default {
             order = response
         });
       })
+    },
+    getContent() {
+      this.$router.push({
+        query:
+            {
+              status: this.selectedStatus,
+              userId: this.selectedUserId,
+            }
+      });
+      axios.get(`${endpoint}/orders/search`, {
+        params: {
+          status: this.selectedStatus,
+          userId: this.selectedUserId,
+        }
+      })
+          .then(response => {
+            this.orders = response.data
+            console.log(response.data)
+            console.log("status - "+this.selectedStatus +" /userId- "+this.selectedUserId)
+          })
+    },
+    clearFilters() {
+      this.selectedStatus = ''
+      this.selectedUserId = ''
+      this.getContent()
+    }
+  },
+  computed: {
+
+    orderStatuses: function () {
+      return this.orders.map(order => order.status)
+    },
+    orderIds: function () {
+      return this.orders.map(order => order.id)
     }
   }
 }
