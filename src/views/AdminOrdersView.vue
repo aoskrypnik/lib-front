@@ -32,45 +32,58 @@
 
       <v-col class="col-12 col-md-6 col-lg-9">
         <v-row>
-          <v-col class="col-12 col-lg-6" v-for="order in orders" :key="order.id">
-            <v-card>
-              <v-card-title>Order id {{ order.id }}</v-card-title>
-              <v-card-subtitle>Order status {{ order.status }}</v-card-subtitle>
-              <v-list>
-                <v-list-item v-for="copy in order.copies" :key="copy.id">
-                  Book copy id {{ copy.id }}
-                </v-list-item>
-              </v-list>
-              <v-btn
-                  v-if="order.status === 'PENDING'"
-                  color="success"
-                  class="my-2 mx-2"
-                  depressed
-                  @click="changeStatus(order, 'TAKEN')"
-                  text>Видати
-              </v-btn>
-              <v-btn
-                  v-if="order.status === 'PENDING'"
-                  color="error"
-                  class="my-2 mx-2"
-                  depressed
-                  text
-                  @click="changeStatus(order, 'CANCELED')"
-              >Відмінити
-              </v-btn>
+          <v-col class="col-12 col-lg-4" v-for="order in orders" :key="order.id">
 
-              <v-btn
-                  v-if="order.status === 'TAKEN'"
-                  color="success"
-                  class="my-2 mx-2"
-                  depressed
-                  @click="changeStatus(order, 'RETURNED')"
-                  text>Отримати
-              </v-btn>
+            <v-card class="d-flex flex-column" :class="{ 'lg-height': $vuetify.breakpoint.lg }">
+              <v-card-title>Order ID: {{ order.id }}</v-card-title>
+              <v-card-subtitle>Order status: {{ order.status }}</v-card-subtitle>
+              <v-card-text>
+                  <span class="copy-id" v-for="copy in order.copies" :key="copy.id">
+                    Book copy ID: {{ copy.id }}
+                  </span>
+              </v-card-text>
+
+              <v-spacer></v-spacer>
+
+              <v-card-actions class="d-flex flex-row">
+                <v-btn
+                    v-if="order.status === 'PENDING'"
+                    color="success"
+                    class="ma-2 flex-grow-1"
+                    @click="changeStatus(order, 'TAKEN')"
+                    text
+                >
+                  <v-icon left>mdi-arrow-right</v-icon>
+                  TAKEN
+                </v-btn>
+                <v-btn
+                    v-if="order.status === 'PENDING'"
+                    color="error"
+                    class="ma-2 flex-grow-1"
+                    @click="changeStatus(order, 'CANCELED')"
+                    text
+                >
+                  <v-icon left>mdi-cancel</v-icon>
+                  CANCEL
+                </v-btn>
+                <v-btn
+                    v-if="order.status === 'TAKEN'"
+                    color="success"
+                    class="ma-2 flex-grow-1"
+                    @click="changeStatus(order, 'RETURNED')"
+                    text
+                >
+                  <v-icon left>mdi-arrow-left</v-icon>
+                  RETURNED
+                </v-btn>
+
+              </v-card-actions>
             </v-card>
+
           </v-col>
         </v-row>
       </v-col>
+
     </v-row>
   </v-container>
 </template>
@@ -117,3 +130,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.copy-id {
+  display: block;
+}
+
+.lg-height {
+  min-height: 248px;
+}
+
+</style>

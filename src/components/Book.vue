@@ -15,7 +15,7 @@
           </span>
         </v-card-subtitle>
         <v-card-text>
-          <div>
+          <div class="chip-group">
             <v-chip
                 small
                 outlined
@@ -91,7 +91,7 @@ export default {
   computed: {
     ...mapGetters([
       'roleGetter'
-    ]),
+    ])
   },
   methods: {
     deleteBook(isbn) {
@@ -114,6 +114,10 @@ export default {
 
 .card-actions {
   padding: 0 16px 16px;
+}
+
+.chip-group {
+  min-height: 64px;
 }
 
 </style>

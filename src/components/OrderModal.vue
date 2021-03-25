@@ -21,8 +21,8 @@
             text
             @click="removeBook()"
         >
-          <v-icon left class="d-none d-sm-inline-flex">mdi-delete-outline</v-icon>
-          <v-icon class="d-inline-flex d-sm-none">mdi-delete-outline</v-icon>
+          <v-icon left>mdi-delete-outline</v-icon>
+          <span class="d-inline-flex d-sm-none">Remove</span>
           <span class="d-none d-sm-inline-flex">Remove from order</span>
         </v-btn>
       </template>
