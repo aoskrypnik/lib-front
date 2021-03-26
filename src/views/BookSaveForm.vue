@@ -45,7 +45,7 @@
                     class="align-center"
                     label="Number of copies"
                     :min="1"
-                    :max="50"
+                    :max="10"
                     hide-details
                 >
                   <template v-slot:append>
