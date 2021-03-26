@@ -98,6 +98,13 @@
 
                     </v-col>
                 </v-row>
+                <div class="text-center mt-8">
+                    <v-pagination
+                            v-model="page"
+                            :length="totalPages"
+                            @input="getContent"
+                    ></v-pagination>
+                </div>
             </v-col>
 
         </v-row>
@@ -109,6 +116,7 @@
     import axios from "axios";
 
     const endpoint = process.env.VUE_APP_ENDPOINT;
+    const size = 6;
 
     export default {
         name: "AdminOrdersView",
@@ -118,11 +126,14 @@
                 orders: [],
                 selectedStatus: '',
                 selectedUserId: '',
-                orderStatuses: ['PENDING', 'TAKEN', 'RETURNED', 'CANCELED']
+                orderStatuses: ['PENDING', 'TAKEN', 'RETURNED', 'CANCELED'],
+                totalPages: 1,
+                page: 1
             }
         },
 
         created() {
+            this.page = +this.$route.query.page || 1
             this.selectedStatus = this.$route.query.status || ''
             this.selectedUserId = this.$route.query.userId || ''
             this.getContent()
@@ -144,24 +155,29 @@
                 this.$router.push({
                     query:
                         {
+                            page: this.page,
                             status: this.selectedStatus,
                             userId: this.selectedUserId,
                         }
                 });
                 axios.get(`${endpoint}/orders/search`, {
                     params: {
+                        size: size,
+                        page: this.page - 1,
                         status: this.selectedStatus,
                         userId: this.selectedUserId,
                     }
                 })
                     .then(response => {
-                        this.orders = response.data
+                        this.orders = response.data.content
+                        this.totalPages = response.data.totalPages
                     })
             },
 
             clearFilters() {
                 this.selectedStatus = ''
                 this.selectedUserId = ''
+                this.page = 1
                 this.getContent()
             },
 

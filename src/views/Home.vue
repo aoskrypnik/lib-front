@@ -63,7 +63,7 @@ import axios from "axios";
 import {mapGetters} from "vuex";
 
 const endpoint = process.env.VUE_APP_ENDPOINT;
-const size = 2;
+const size = 6;
 
 export default {
   name: 'Home',
@@ -92,7 +92,6 @@ export default {
       this.books = this.books.filter(book => book.isbn !== isbn)
     },
     getContent() {
-      console.log(this.availableOnly)
       this.$router.push({
         query:
             {
@@ -114,7 +113,6 @@ export default {
           .then(response => {
             this.books = response.data.content
             this.totalPages = response.data.totalPages
-            console.log(response.data)
           })
     },
     clearFilters() {
@@ -126,8 +124,7 @@ export default {
     }
   },
   computed: {
-    ...
-        mapGetters([
+    ...mapGetters([
           'genresGetter',
           'authorsGetter'
         ]),
