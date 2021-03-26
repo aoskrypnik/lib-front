@@ -60,7 +60,7 @@ export default {
     ]),
     doOrder() {
       axios.post(`${endpoint}/orders`, {
-        copiesIds: this.storageGetter.map(book => book.copies.filter(copy => copy.isAvailable)[0].id),
+        bookIsbns: this.storageGetter.map(book => book.isbn),
       }).then(response => {
         console.log(response)
         this.storageRemoveAllMutation()

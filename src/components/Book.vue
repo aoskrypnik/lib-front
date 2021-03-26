@@ -1,5 +1,5 @@
 <template>
-  <v-card class="book-card">
+  <v-card :disabled="!available" class="book-card">
     <div class="d-flex">
       <v-img
           :src="`${book.imageLink}`"
@@ -85,20 +85,34 @@ export default {
     OrderModal,
     DeleteModal
   },
+
   props: [
     'book'
   ],
+
+  data(){
+    return {
+      available: true
+    }
+  },
+
+  created() {
+    this.available = this.book.copies.map(copy => copy.isAvailable).some(x => x === true)
+  },
+
   computed: {
     ...mapGetters([
       'roleGetter'
     ])
   },
+
   methods: {
     deleteBook(isbn) {
       console.log(isbn)
       this.$emit("delete-book", isbn)
     }
   }
+
 }
 </script>
 

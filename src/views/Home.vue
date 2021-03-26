@@ -8,7 +8,7 @@
           </v-card-title>
           <v-card-text>
             <v-checkbox
-                v-model="isAvailableOnly"
+                v-model="availableOnly"
                 label="Available only"
                 @change="getContent"
             >
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       books: [],
-      isAvailableOnly: false,
+      availableOnly: false,
       selectedAuthor: '',
       selectedGenre: '',
       totalPages: 1,
@@ -84,7 +84,7 @@ export default {
     this.page = +this.$route.query.page || 1
     this.selectedAuthor = this.$route.query.author || ''
     this.selectedGenre = this.$route.query.genre || ''
-    this.isAvailableOnly = this.$route.query.isAvailableOnly === 'true'
+    this.availableOnly = this.$route.query.availableOnly === 'true'
     this.getContent()
   },
   methods: {
@@ -92,14 +92,14 @@ export default {
       this.books = this.books.filter(book => book.isbn !== isbn)
     },
     getContent() {
-      console.log(this.isAvailableOnly)
+      console.log(this.availableOnly)
       this.$router.push({
         query:
             {
               page: this.page,
               author: this.selectedAuthor,
               genre: this.selectedGenre,
-              isAvailableOnly: this.isAvailableOnly,
+              availableOnly: this.availableOnly,
             }
       });
       axios.get(`${endpoint}/books`, {
@@ -107,7 +107,7 @@ export default {
           page: this.page - 1,
           author: this.selectedAuthor,
           genre: this.selectedGenre,
-          isAvailableOnly: this.isAvailableOnly,
+          availableOnly: this.availableOnly,
           size: size
         }
       })
@@ -120,7 +120,7 @@ export default {
     clearFilters() {
       this.selectedAuthor = ''
       this.selectedGenre = ''
-      this.isAvailableOnly = false
+      this.availableOnly = false
       this.page = 1
       this.getContent()
     }
