@@ -8,11 +8,21 @@
           </v-card-title>
           <v-card-text>
             <v-checkbox
+                class="mt-0"
                 v-model="availableOnly"
                 label="Available only"
                 @change="getContent"
             >
             </v-checkbox>
+
+            <v-text-field
+                v-model="searchTitle"
+                label="Title"
+                outlined
+                dense
+                clearable
+            ></v-text-field>
+
             <v-autocomplete
                 v-model="selectedAuthor"
                 :items="authorNames"

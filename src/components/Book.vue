@@ -1,11 +1,10 @@
 <template>
-  <v-card :disabled="!available" class="book-card">
+  <v-card :disabled="roleGetter!=='ADMINISTRATOR' && !available" class="book-card">
     <div class="d-flex">
       <v-img
           :src="`${book.imageLink}`"
           max-width="150px"
-          height="220px"
-          class="align-self-center"
+          class="book-cover"
       ></v-img>
       <div>
         <v-card-title> {{ book.title }}</v-card-title>
@@ -25,11 +24,11 @@
             > {{ genre.genreName }}
             </v-chip>
             <v-chip small outlined label class="chip"> {{ book.pagesNum }} pages</v-chip>
-            <v-chip small outlined label class="chip"> {{ book.publishYear }} </v-chip>
+            <v-chip small outlined label class="chip"> {{ book.publishYear }}</v-chip>
             <v-chip small outlined label class="chip"> {{ book.publishCountry }}</v-chip>
             <v-chip small outlined label
-                    color="danger" class="chip"
-                    v-if="book.copiesNum === 0"
+                    color="error" class="chip"
+                    v-if="!available"
             >
               Not available
             </v-chip>
@@ -41,31 +40,23 @@
             </v-chip>
           </div>
         </v-card-text>
+        <v-spacer></v-spacer>
         <v-card-actions class="card-actions">
-          <v-btn text class="ml-auto"
-                 v-if="book.copiesNum === 0"
-          >
-            <v-icon left class="d-none d-sm-inline-flex">mdi-bell-outline</v-icon>
-            <v-icon class="d-inline-flex d-sm-none">mdi-bell-outline</v-icon>
-            <span class="d-none d-sm-inline-flex">Notify</span>
-          </v-btn>
-          <div v-else>
-            <orderModal
-                :book=book
-                v-if="roleGetter==='READER'"
-            ></orderModal>
-            <div v-else-if="roleGetter==='ADMINISTRATOR'">
-              <v-btn
-                  class="ml-2"
-                  text
-                  @click="$router.push({ name: 'BookEditForm', params: {id: book.isbn }})"
-              >
-                <v-icon left class="d-none d-sm-inline-flex">mdi-pencil</v-icon>
-                <v-icon class="d-inline-flex d-sm-none">mdi-pencil</v-icon>
-                <span class="d-none d-sm-inline-flex">Edit</span>
-              </v-btn>
-              <deleteModal :book="book" @delete-book="deleteBook"></deleteModal>
-            </div>
+          <orderModal
+              :book=book
+              v-if="roleGetter==='READER' && available"
+          ></orderModal>
+          <div v-else-if="roleGetter==='ADMINISTRATOR'">
+            <v-btn
+                class="ml-2"
+                text
+                @click="$router.push({ name: 'BookEditForm', params: {id: book.isbn }})"
+            >
+              <v-icon left class="d-none d-sm-inline-flex">mdi-pencil</v-icon>
+              <v-icon class="d-inline-flex d-sm-none">mdi-pencil</v-icon>
+              <span class="d-none d-sm-inline-flex">Edit</span>
+            </v-btn>
+            <deleteModal :book="book" @delete-book="deleteBook"></deleteModal>
           </div>
         </v-card-actions>
       </div>
@@ -90,7 +81,7 @@ export default {
     'book'
   ],
 
-  data(){
+  data() {
     return {
       available: true
     }

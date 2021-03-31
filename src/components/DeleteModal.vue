@@ -5,8 +5,13 @@
   >
 
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text color="error" class="ml-2" v-bind="attrs"
-             v-on="on">
+      <v-btn
+          text
+          color="error"
+          class="ml-2"
+          v-bind="attrs"
+          v-on="on"
+      >
         <v-icon left class="d-none d-sm-inline-flex">mdi-trash-can-outline</v-icon>
         <v-icon class="d-inline-flex d-sm-none">mdi-trash-can-outline</v-icon>
         <span class="d-none d-sm-inline-flex">Delete</span>

@@ -206,8 +206,5 @@
         display: block;
     }
 
-    .lg-height {
-        min-height: 248px;
-    }
 
 </style>
