@@ -16,11 +16,12 @@
             </v-checkbox>
 
             <v-text-field
-                v-model="searchTitle"
+                v-model="title"
                 label="Title"
                 outlined
                 dense
                 clearable
+                @change="getContent"
             ></v-text-field>
 
             <v-autocomplete
@@ -84,6 +85,7 @@ export default {
     return {
       books: [],
       availableOnly: false,
+      title: '',
       selectedAuthor: '',
       selectedGenre: '',
       totalPages: 1,
@@ -91,6 +93,7 @@ export default {
     }
   },
   created() {
+    this.title = this.$route.query.title
     this.page = +this.$route.query.page || 1
     this.selectedAuthor = this.$route.query.author || ''
     this.selectedGenre = this.$route.query.genre || ''
@@ -105,6 +108,7 @@ export default {
       this.$router.push({
         query:
             {
+              title: this.title,
               page: this.page,
               author: this.selectedAuthor,
               genre: this.selectedGenre,
@@ -113,6 +117,7 @@ export default {
       });
       axios.get(`${endpoint}/books`, {
         params: {
+          title: this.title,
           page: this.page - 1,
           author: this.selectedAuthor,
           genre: this.selectedGenre,
@@ -126,6 +131,7 @@ export default {
           })
     },
     clearFilters() {
+      this.title = ''
       this.selectedAuthor = ''
       this.selectedGenre = ''
       this.availableOnly = false
