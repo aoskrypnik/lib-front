@@ -107,6 +107,14 @@
       </v-container>
     </v-main>
 
+    <v-footer app padless>
+      <v-col
+              class="text-center"
+              cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>Kyiv</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 

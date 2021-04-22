@@ -1,9 +1,9 @@
 <template>
-  <v-card :disabled="roleGetter!=='ADMINISTRATOR' && !available" class="book-card">
+  <v-card :disabled="roleGetter!=='ADMINISTRATOR' && !available" class="book-card" height="100%">
     <div class="d-flex">
       <v-img
           :src="`${book.imageLink}`"
-          max-width="150px"
+          max-width="150px" contain
           class="book-cover"
       ></v-img>
       <div>
